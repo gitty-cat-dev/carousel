@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Compact Auto Carousel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+    }
+
+    .carousel-wrapper {
+      overflow-x: hidden;
+      border-top: 2px solid #ccc;
+      border-bottom: 2px solid #ccc;
+      position: relative;
+    }
+
+    .carousel-inner {
+      display: flex;
+      white-space: nowrap;
+    }
+
+    .feature-box {
+      flex: 0 0 auto;
+      width: 220px;
+      padding: 25px 15px;
+      border-left: 1px solid #ddd;
+      text-align: center;
+      box-sizing: border-box;
+      user-select: none;
+      white-space: normal;
+      overflow-wrap: break-word;
+    }
+
+    .feature-box:first-child {
+      border-left: none;
+    }
+
+    .feature-box img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 12px;
+    }
+
+    .feature-box h3 {
+      font-family: monospace;
+      font-size: 12px;
+      letter-spacing: 0.4px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .feature-box p {
+      font-size: 13px;
+      color: #333;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .feature-box {
+        width: 180px;
+        padding: 20px 12px;
+      }
+
+      .feature-box h3 {
+        font-size: 11px;
+      }
+
+      .feature-box p {
+        font-size: 12px;
+      }
+
+      .feature-box img {
+        width: 45px;
+        height: 45px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .feature-box {
+        width: 150px;
+        padding: 18px 10px;
+      }
+
+      .feature-box h3 {
+        font-size: 10px;
+      }
+
+      .feature-box p {
+        font-size: 11px;
+      }
+
+      .feature-box img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="carousel-wrapper" id="carousel">
+  <div class="carousel-inner" id="carousel-inner">
+    <!-- JavaScript inserts content -->
+  </div>
+</div>
+
+<script>
+  const features = [
+    {
+      title: "UNCOMPROMISING QUALITY",
+      desc: "Premium extracts created with meticulous precision"
+    },
+    {
+      title: "ADVANCED FORMULATIONS",
+      desc: "Innovative blends designed for specific consciousness states"
+    },
+    {
+      title: "RIGOROUS TESTING",
+      desc: "Rigorous multi-stage testing ensures absolute purity"
+    },
+    {
+      title: "RADICAL TRANSPARENCY",
+      desc: "Complete lab results available for every product"
+    },
+    {
+      title: "CONSCIOUSNESS EXPLORATION",
+      desc: "Products crafted to elevate your mental experience"
+    },
+    {
+      title: "SATISFACTION GUARANTEE",
+      desc: "60-day risk-free trial on all products"
+    }
+  ];
+
+  const container = document.getElementById('carousel-inner');
+  const wrapper = document.getElementById('carousel');
+
+  // Create boxes and duplicate enough for seamless scrolling
+  for (let i = 0; i < 4; i++) {
+    features.forEach(f => {
+      const box = document.createElement('div');
+      box.className = 'feature-box';
+      box.innerHTML = `
+        <img src="https://via.placeholder.com/60" alt="">
+        <h3>${f.title}</h3>
+        <p>${f.desc}</p>
+      `;
+      container.appendChild(box);
+    });
+  }
+
+  let scrollSpeed;
+
+  function getSpeed() {
+    if (window.innerWidth <= 480) return 0.3;
+    if (window.innerWidth <= 768) return 0.3;
+    return 0.3;
+  }
+
+  let scrollPos = 0;
+
+  function autoScroll() {
+    scrollPos += scrollSpeed;
+    wrapper.scrollLeft = scrollPos;
+
+    // Reset scroll when halfway through content (seamless loop)
+    if (scrollPos >= container.scrollWidth / 2) {
+      scrollPos = 0;
+      wrapper.scrollLeft = scrollPos;
+    }
+
+    requestAnimationFrame(autoScroll);
+  }
+
+  window.addEventListener('load', () => {
+    scrollSpeed = getSpeed();
+    requestAnimationFrame(autoScroll);
+  });
+
+  // Optional: update speed on resize
+  window.addEventListener('resize', () => {
+    scrollSpeed = getSpeed();
+  });
+</script>
+
+</body>
+</html>
