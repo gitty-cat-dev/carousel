@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -47,17 +47,21 @@
 
     .feature-box h3 {
       font-family: monospace;
-      font-size: 12px;
+      font-size: 15px;
       letter-spacing: 0.4px;
       font-weight: bold;
       margin: 8px 0;
     }
 
-    .feature-box p {
-      font-size: 13px;
-      color: #333;
-      margin: 0;
-    }
+   .feature-box p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #222;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  margin: 0;
+}
 
     @media (max-width: 768px) {
       .feature-box {
@@ -112,27 +116,33 @@
   const features = [
     {
       title: "UNCOMPROMISING QUALITY",
-      desc: "Premium extracts created with meticulous precision"
+      desc: "Premium extracts created with meticulous precision",
+      img: "https://raw.githubusercontent.com/gitty-cat-dev/article-images/aa6fb320060c20aba9cf53325b3e9caac3812321/area52-feature-1.png"
     },
     {
       title: "ADVANCED FORMULATIONS",
-      desc: "Innovative blends designed for specific consciousness states"
+      desc: "Innovative blends designed for specific consciousness states",
+      img: "https://raw.githubusercontent.com/gitty-cat-dev/article-images/aa6fb320060c20aba9cf53325b3e9caac3812321/area52-feature-2.png"
     },
     {
       title: "RIGOROUS TESTING",
-      desc: "Rigorous multi-stage testing ensures absolute purity"
+      desc: "Rigorous multi-stage testing ensures absolute purity",
+      img: "https://raw.githubusercontent.com/gitty-cat-dev/article-images/aa6fb320060c20aba9cf53325b3e9caac3812321/area52-feature-3.png"
     },
     {
       title: "RADICAL TRANSPARENCY",
-      desc: "Complete lab results available for every product"
+      desc: "Complete lab results available for every product",
+      img: "https://raw.githubusercontent.com/gitty-cat-dev/article-images/aa6fb320060c20aba9cf53325b3e9caac3812321/area52-feature-4.png"
     },
     {
       title: "CONSCIOUSNESS EXPLORATION",
-      desc: "Products crafted to elevate your mental experience"
+      desc: "Products crafted to elevate your mental experience",
+      img: "https://raw.githubusercontent.com/gitty-cat-dev/article-images/aa6fb320060c20aba9cf53325b3e9caac3812321/area52-feature-5.png"
     },
     {
       title: "SATISFACTION GUARANTEE",
-      desc: "60-day risk-free trial on all products"
+      desc: "60-day risk-free trial on all products",
+      img: "https://raw.githubusercontent.com/gitty-cat-dev/article-images/aa6fb320060c20aba9cf53325b3e9caac3812321/area52-feature-6.png"
     }
   ];
 
@@ -145,7 +155,7 @@
       const box = document.createElement('div');
       box.className = 'feature-box';
       box.innerHTML = `
-        <img src="https://via.placeholder.com/60" alt="">
+        <img src="${f.img}" alt="${f.title}">
         <h3>${f.title}</h3>
         <p>${f.desc}</p>
       `;
@@ -156,8 +166,8 @@
   let scrollSpeed;
 
   function getSpeed() {
-    if (window.innerWidth <= 480) return 0.3;
-    if (window.innerWidth <= 768) return 0.3;
+    if (window.innerWidth <= 480) return 0.4;
+    if (window.innerWidth <= 768) return 0.4;
     return 0.3;
   }
 
@@ -167,7 +177,6 @@
     scrollPos += scrollSpeed;
     wrapper.scrollLeft = scrollPos;
 
-    // Reset scroll when halfway through content (seamless loop)
     if (scrollPos >= container.scrollWidth / 2) {
       scrollPos = 0;
       wrapper.scrollLeft = scrollPos;
@@ -181,7 +190,6 @@
     requestAnimationFrame(autoScroll);
   });
 
-  // Optional: update speed on resize
   window.addEventListener('resize', () => {
     scrollSpeed = getSpeed();
   });
